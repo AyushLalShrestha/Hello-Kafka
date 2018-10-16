@@ -6,7 +6,9 @@
 
 <!-- Inside from Kafka Folder: -->
 1. start zookeeper server from kafka folder itself
- ```bin/zookeeper-server-start.sh config/zookeeper.properties```
+ ```
+ bin/zookeeper-server-start.sh config/zookeeper.properties
+ ```
 
 2. start the kafka broker server
  ```bin/kafka-server-start.sh config/server.properties```

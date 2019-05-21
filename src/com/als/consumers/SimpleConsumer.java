@@ -1,16 +1,16 @@
 package com.als.consumers;
 
-
 import java.util.*;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+
 public class SimpleConsumer {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
-        String topicName = "testtopic";
-        String groupName = "test-consumer-group";
+        String topicName = "test";
+        String groupName = "test-consumer-group-1";
 
         KafkaConsumer<String, String> consumer = null;
 
@@ -24,17 +24,18 @@ public class SimpleConsumer {
         consumer = new KafkaConsumer<>(props);
 
         consumer.subscribe(Arrays.asList(topicName));
-        try{
-            while (true){
+        try {
+            while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(100);
-                for (ConsumerRecord<String, String> record : records){
-                    System.out.println("Topic:"+ record.topic() +" Partition:" + record.partition() + " Offset:" + record.offset() + " Value:"+ record.value());
+                for (ConsumerRecord<String, String> record : records) {
+                    System.out.println("Topic:" + record.topic() + " Partition:" + record.partition() + " Offset:"
+                            + record.offset() + " Value:" + record.value());
                     // Do some processing and save it to Database or some other processing
                 }
-                //consumer.commitSync(rebalanceListner.getCurrentOffsets());
+                // consumer.commitSync(rebalanceListner.getCurrentOffsets());
                 consumer.commitAsync();
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Exception.");
             ex.printStackTrace();
         } finally {
@@ -43,4 +44,3 @@ public class SimpleConsumer {
 
     }
 }
-

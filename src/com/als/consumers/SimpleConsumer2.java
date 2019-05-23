@@ -1,11 +1,13 @@
-//package com.als.consumers;
+package com.als.consumers;
 
-import java.util.*;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 
-public class SimpleConsumer {
+import java.util.Arrays;
+import java.util.Properties;
+
+public class SimpleConsumer2 {
 
     public static void main(String[] args) throws Exception {
 
@@ -28,17 +30,11 @@ public class SimpleConsumer {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(100);
                 for (ConsumerRecord<String, String> record : records) {
-                    System.out.println("Topic:" + record.topic() +
-                            " Partition:" + record.partition() +
-                            " Offset:" + record.offset() +
-                            " Key:" + record.key() +
-                            " Value:" + record.value());
-                    // Do something like save it to Database or some other processing
+                    System.out.println("Topic:" + record.topic() + " Partition:" + record.partition() + " Offset:"
+                            + record.offset() + " Value:" + record.value());
+                    // Do some processing and save it to Database or some other processing
                 }
                 // consumer.commitSync(rebalanceListner.getCurrentOffsets());
-                System.out.println("Waiting before commit for 20 seconds");
-                Thread.sleep(20000);
-                System.out.println("Committing now, then reading");
                 consumer.commitAsync();
             }
         } catch (Exception ex) {

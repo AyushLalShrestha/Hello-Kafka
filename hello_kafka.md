@@ -22,3 +22,6 @@
 
 <!-- Start console consumer  -->
  6. bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+
+ <!-- See consumer group information in a kafka broker -->
+ 7. bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group count_errors --describe

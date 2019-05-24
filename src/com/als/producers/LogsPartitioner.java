@@ -1,6 +1,7 @@
 //package com.als.producers;
 
 import java.util.*;
+
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.*;
 import org.apache.kafka.common.utils.*;
@@ -27,11 +28,11 @@ public class LogsPartitioner implements Partitioner {
             throw new InvalidRecordException("All messages must have colector name as key");
 
         if (((String) key).equals(collectorName)) {
-        // p = Utils.toPositive(Utils.murmur2(valueBytes)) % sp;
+            // p = Utils.toPositive(Utils.murmur2(valueBytes)) % sp;
             p = 0;
 
         } else {
-        // p = Utils.toPositive(Utils.murmur2(keyBytes)) % (numPartitions - sp) + sp;
+            // p = Utils.toPositive(Utils.murmur2(keyBytes)) % (numPartitions - sp) + sp;
             p = 1;
         }
         System.out.println("Key = " + (String) key + " Partition = " + p);
